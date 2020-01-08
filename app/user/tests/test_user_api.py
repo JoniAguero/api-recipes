@@ -6,9 +6,8 @@ from rest_framework.test import APIClient
 from rest_framework import status
 
 CREATE_USER_URL = reverse('user:create')
-TOKEN_URL = reverse('user:token')
-ME_URL = reverse('user:me')
-
+TOKEN_URL       = reverse('user:token')
+ME_URL          = reverse('user:me')
 
 def create_user(**params):
   return get_user_model().objects.create_user(**params)
@@ -93,7 +92,7 @@ class PublicUserApiTests(TestCase):
 
   def test_retrieve_user_unauthorized(self):
     """Test that authentication is required for users"""
-    res = self.client.get(ME.URL)
+    res = self.client.get(ME_URL)
     self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 class PrivateUserApiTests(TestCase):
