@@ -34,8 +34,8 @@ class PrivateIngredientsApiTests(TestCase):
 
   def test_retrieve_ingredient_lsit(self):
     """Test retrieving a list of ingredients"""
-    Ingredient.objects().create(user=self, name='Kake')
-    Ingredient.objects().create(user=self, name='Salt')
+    Ingredient.objects.create(user=self, name='Kake')
+    Ingredient.objects.create(user=self, name='Salt')
 
     res = self.client.get(INGREDIENTS_URL)
 
