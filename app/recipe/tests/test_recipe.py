@@ -8,7 +8,7 @@ from rest_framework.test import APIClient
 from core.models import Recipe
 from recipe.serializers import RecipeSerializer
 
-RECIPES_URL = reverse('recipe:recipe_list')
+RECIPES_URL = reverse('recipe:recipe-list')
 
 def sample_recipe(user, **params):
   """Created and return a sample recipe"""
@@ -19,6 +19,8 @@ def sample_recipe(user, **params):
   }
 
   defaults.update(params)
+
+  return Recipe.objects.create(user=user, **defaults)
 
 class PublicRecipeApiTests(TestCase):
   """Tests the publicly available recipe API"""
@@ -62,7 +64,7 @@ class PrivateRecipesApiTests(TestCase):
       'testpass'
     )
 
-    sample_recipe(user=self.user)
+    sample_recipe(user=user2)
     sample_recipe(user=self.user)
 
     res = self.client.get(RECIPES_URL)
